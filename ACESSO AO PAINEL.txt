@@ -1,0 +1,7 @@
+juan@teste.com.br
+123456789
+
+
+laravel
+php-8.2.12
+/register
