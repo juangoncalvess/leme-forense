@@ -102,37 +102,31 @@ class MainController extends Controller
             case "cadastrar": 
                 $acao = "Cadastrar";
                 $resultDB = []; 
-                $modelosDB = [];
-                return view('painel.clientes', ['acao' => $acao, 'resultDB' => $resultDB]);
             break;
             case "editar":
                 $acao = "Editar";
                 $resultDB = Clientes::findOrFail($id); 
-                $modelosDB = [];
-                return view('painel.clientes', ['acao' => $acao, 'resultDB' => $resultDB]);
             break;
             case "listar":
                 $acao = "Listar";
                 $resultDB = DB::table('clientes')->select('*')->where('ativo', '1')->orderBy('nome', 'ASC')->get(); 
-                return view('painel.clientes', ['acao' => $acao, 'resultDB' => $resultDB]);
-            break; 
+            break;   
         }
+        return view('painel.clientes', ['acao' => $acao, 'resultDB' => $resultDB]);
     }
     public function painel_pedidos($acao, $id = null){
         switch($acao){
             case "cadastrar":
                 $acao = "Cadastrar";
                 $resultDB = [];
-                $modelosDB = [];
                 $result_clientes = DB::table('clientes')->select('*')->where('ativo', '1')->orderBy('nome', 'ASC')->get(); 
                 $result_status = [];
                 $result_img_pedidos = [];
-            break;
+            break; 
             case "editar":
                 $acao = "Editar";
                 $resultDB = Pedidos::findOrFail($id);
                 $result_img_pedidos = DB::table('pedidos_imagem')->select('img')->where('pedido_id', $resultDB->id)->first();
-                $modelosDB = [];
                 $result_clientes = DB::table('clientes')->select('*')->where('ativo', '1')->orderBy('nome', 'ASC')->get();  
                 $result_status = DB::table('pedido_status')->select('*')->orderBy('descricao', 'ASC')->get(); 
             break;
